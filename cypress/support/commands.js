@@ -89,7 +89,6 @@ Cypress.Commands.add('editNote', (note, newNoteValue, attachFile = false) => {
 
 Cypress.Commands.add('deleteNote', note => {
   cy.contains('.list-group-item', note).click()
-  cy.wait(4000)
   cy.contains('button', 'Delete').click()
 
   cy.get('.list-group-item')
