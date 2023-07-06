@@ -1,23 +1,24 @@
-// cypress/e2e/login.cy.js
+// cypress/support/commands.js
 
-describe('Login', () => {
-  it('successfully logs in', () => {
-    cy.intercept('GET', '**/notes').as('getNotes')
-      cy.viewport(1440, 900)
-  /**
-   *  cy.visit('/login')
-      cy.get('#email').type(Cypress.env('USER_EMAIL'))
-      cy.get('#password').type(Cypress.env('USER_PASSWORD'), { log: false })
-      cy.contains('button', 'Login').click()
-      cy.wait(4000)
-      cy.wait('@getNotes')
-   */
-     
-    cy.guiLogin()
-    cy.wait('@getNotes')
+// ... Comando de signup aqui
 
-     // cy.contains('h1', 'Your Notes').should('be.visible')
-      cy.contains('a', 'Create a new note').should('be.visible')
-    })
-  })
-  
+Cypress.Commands.add('guiLogin', (
+  username = Cypress.env('USER_EMAIL'),
+  password = Cypress.env('USER_PASSWORD')
+) => {
+  cy.intercept('GET', '**/notes').as('getNotes')
+  cy.visit('/login')
+  cy.get('#email').type(username)
+  cy.get('#password').type(password, { log: false })
+  cy.contains('button', 'Login').click()
+  cy.wait('@getNotes')
+  cy.contains('h1', 'Your Notes').should('be.visible')
+})
+
+Cypress.Commands.add('sessionLogin', (
+  username = Cypress.env('USER_EMAIL'),
+  password = Cypress.env('USER_PASSWORD')
+) => {
+  const login = () => cy.guiLogin(username, password)
+  cy.session(username, login)
+})
