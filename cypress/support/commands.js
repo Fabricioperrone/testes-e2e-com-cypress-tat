@@ -5,7 +5,7 @@ Cypress.Commands.add('fillSignupFormAndSubmit', (email, password) => {
   cy.get('#password').type(password, { log: false })
   cy.get('#confirmPassword').type(password, { log: false })
   cy.contains('button', 'Signup').click()
-  cy.get('#confirmationCode', { timeout: 15000 }).should('be.visible')
+  cy.get('#confirmationCode', { timeout: 15000 } ).should('be.visible')
   cy.mailosaurGetMessage(Cypress.env('MAILOSAUR_SERVER_ID'), {
     sentTo: email
   }).then(({ html }) => {
