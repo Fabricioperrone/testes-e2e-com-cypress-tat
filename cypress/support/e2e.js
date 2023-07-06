@@ -1,8 +1,11 @@
 
+import registerCypressGrep from '@cypress/grep/src/support'
+registerCypressGrep()
+
 import 'cypress-iframe'
-import './commands'
 import 'cypress-mailosaur'
 
+import './commands'
 
 const app = window.top;
 if (!app.document.head.querySelector('[data-hide-command-log-request]')) {
