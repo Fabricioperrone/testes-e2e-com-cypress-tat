@@ -104,4 +104,3 @@ Cypress.Commands.add('fillSettingsFormAndSubmit', () => {
     .type('12345')
   cy.contains('button', 'Purchase').click()
 })
-
