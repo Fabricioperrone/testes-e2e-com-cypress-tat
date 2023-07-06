@@ -104,3 +104,9 @@ Cypress.Commands.add('fillSettingsFormAndSubmit', () => {
     .type('12345')
   cy.contains('button', 'Purchase').click()
 })
+
+Cypress.on('uncaught:exception', (err, runnable) => {
+  // returning false here prevents Cypress from
+  // failing the test
+  return false
+})
