@@ -1,14 +1,23 @@
 
 
-Cypress.on('uncaught:exception', (err, runnable, promise) => {
-  // when the exception originated from an unhandled promise
-  // rejection, the promise is provided as a third argument
-  // you can turn off failing the test in this case
-  if (promise) {
+it('is doing something very important', (done) => {
+  // this event will automatically be unbound when this
+  // test ends because it's attached to 'cy'
+  cy.on('uncaught:exception', (err, runnable) => {
+    expect(err.message).to.include('something about the error')
+
+    // using mocha's async done callback to finish
+    // this test so we prove that an uncaught exception
+    // was thrown
+    done()
+
+    // return false to prevent the error from
+    // failing this test
     return false
-  }
-  // we still want to ensure there are no other unexpected
-  // errors, so we let them fail the test
+  })
+
+  // assume this causes an error
+  cy.get('button').click()
 })
 
 import 'cypress-iframe'
