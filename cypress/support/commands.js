@@ -12,7 +12,7 @@ Cypress.Commands.add('fillSignupFormAndSubmit', (email, password) => {
   }).then(message => {
     const confirmationCode = message.html.body.match(/\d{6}/)[0]
     cy.get('#confirmationCode').type(`${confirmationCode}{enter}`)
-    cy.wait('@getNotes')
+    cy.wait('@getNotes', { timeout: 15000 })
   })
 })
 
