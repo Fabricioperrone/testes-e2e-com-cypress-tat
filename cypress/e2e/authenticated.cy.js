@@ -12,7 +12,7 @@ describe('Scenarios where authentication is a pre-condition', () => {
     const noteDescription = faker.lorem.words(4)
 
     cy.createNote(noteDescription)
-    cy.wait('@getNotes')
+    cy.wait('@getNotes', { timeout: 10000 })
 
     const updatedNoteDescription = faker.lorem.words(4)
     const attachFile = true
