@@ -1,4 +1,5 @@
-// cypress/e2e/authenticated.cy.js
+/// <reference path="../support/commands.d.ts" />
+
 
 import { faker } from '@faker-js/faker/locale/en'
 
@@ -48,4 +49,3 @@ describe('Scenarios where authentication is a pre-condition', () => {
     cy.get('#email').should('be.visible')
   })
 })
-
