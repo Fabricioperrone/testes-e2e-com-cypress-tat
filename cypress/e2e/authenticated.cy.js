@@ -48,3 +48,4 @@ describe('Scenarios where authentication is a pre-condition', () => {
     cy.get('#email').should('be.visible')
   })
 })
+
